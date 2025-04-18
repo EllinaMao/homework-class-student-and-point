@@ -18,7 +18,7 @@ private:
 	char* city_of_school;
 	char* country_of_school;
 
-
+	
 	void InputStringField(char*& field, const char* prompt);
 	char* InputPhoneNumber();
 	short InputNumber();
@@ -27,7 +27,15 @@ public:
 	student();
 	student(short gn, const char* fn, const char* ph, const char* ct, const char* country, const char* sc, const char* ct_sc, const char* country_st);
 	~student();
-	
+	student(const student& other);
+	student& operator= (const student&obj);//copy
+
+	//move
+	student(student&& other); //move
+	student& operator= (student&& obj);//move
+
+
+	//Setters
 	void SetAllFields();
 	void SetGroupNumber();
 	void SetPhoneNumber();
@@ -38,26 +46,23 @@ public:
 	void SetCityOfSchool();
 	void SetCountryOfSchool();
 
-
-	const short GetGroupNumber()const;
-	const char* GetPhoneNumber()const;
-	const char* GetFullName()const;
-	const char* GetCity()const;
-	const char* GetCountry()const;
-	const char* GetSchool()const;
-	const char* GetCityOfSchool()const;
-	const char* GetCountryOfSchool()const;
+	//Getters
+	short GetGroupNumber()const {return group_number;};
+	const char* GetPhoneNumber()const { return phonenumber; };
+	const char* GetFullName()const { return full_name; };
+	const char* GetCity()const { return city; };
+	const char* GetCountry()const { return country; };
+	const char* GetSchool()const { return school; };
+	const char* GetCityOfSchool()const { return city_of_school; };
+	const char* GetCountryOfSchool()const { return country_of_school; };
 
 
 	void PrintStudent() const;
 
-
-
-
-
-
-
-
-
+	friend istream& operator>>(istream& is, student& obj);
+	friend ostream& operator<<(ostream& os, const student& obj);
 };
 
+
+ostream& operator<<(ostream& os, const student& obj);	
+void Cinfail();

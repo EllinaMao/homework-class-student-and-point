@@ -77,6 +77,139 @@ student::~student()
 
 }
 
+student::student(const student& st)
+	: group_number(st.group_number) {
+
+	cout << "copy contructor" << endl;
+
+	full_name = new char[strlen(st.full_name) + 1];
+	strcpy_s(full_name, strlen(st.full_name) + 1, st.full_name);
+
+	phonenumber = new char[strlen(st.phonenumber) + 1];
+	strcpy_s(phonenumber, strlen(st.phonenumber) + 1, st.phonenumber);
+
+	city = new char[strlen(st.city) + 1];
+	strcpy_s(city, strlen(st.city) + 1, st.city);
+
+	country = new char[strlen(st.country) + 1];
+	strcpy_s(country, strlen(st.country) + 1, st.country);
+
+	school = new char[strlen(st.school) + 1];
+	strcpy_s(school, strlen(st.school) + 1, st.school);
+
+	city_of_school = new char[strlen(st.city_of_school) + 1];
+	strcpy_s(city_of_school, strlen(st.city_of_school) + 1, st.city_of_school);
+
+	country_of_school = new char[strlen(st.country_of_school) + 1];
+	strcpy_s(country_of_school, strlen(st.country_of_school) + 1, st.country_of_school);
+}
+
+student& student::operator=(const student& obj)  
+{  
+
+	cout << "operator =" << endl;
+
+   if (this == &obj)  
+   {  
+       return *this;  
+   }  
+
+   if (phonenumber) { delete[] phonenumber; }  
+   if (full_name) { delete[] full_name; }  
+   if (city) { delete[] city; }  
+   if (country) { delete[] country; }  
+   if (school) { delete[] school; }  
+   if (city_of_school) { delete[] city_of_school; }  
+   if (country_of_school) { delete[] country_of_school; }  
+
+   group_number = obj.group_number;  
+
+   phonenumber = new char[strlen(obj.phonenumber) + 1];  
+   strcpy_s(phonenumber, strlen(obj.phonenumber) + 1, obj.phonenumber);  
+
+   full_name = new char[strlen(obj.full_name) + 1];  
+   strcpy_s(full_name, strlen(obj.full_name) + 1, obj.full_name);  
+
+   city = new char[strlen(obj.city) + 1];  
+   strcpy_s(city, strlen(obj.city) + 1, obj.city);  
+
+   country = new char[strlen(obj.country) + 1];  
+   strcpy_s(country, strlen(obj.country) + 1, obj.country);  
+
+   school = new char[strlen(obj.school) + 1];  
+   strcpy_s(school, strlen(obj.school) + 1, obj.school);  
+
+   city_of_school = new char[strlen(obj.city_of_school) + 1];  
+   strcpy_s(city_of_school, strlen(obj.city_of_school) + 1, obj.city_of_school);  
+
+   country_of_school = new char[strlen(obj.country_of_school) + 1];  
+   strcpy_s(country_of_school, strlen(obj.country_of_school) + 1, obj.country_of_school);  
+
+   return *this;  
+}
+	
+
+student::student(student&& st)
+
+	: group_number(st.group_number),
+	phonenumber(st.phonenumber),
+	full_name(st.full_name),
+	city(st.city),
+	country(st.country),
+	school(st.school),
+	city_of_school(st.city_of_school),
+	country_of_school(st.country_of_school) 
+{
+	cout << "move constuctor" << endl;
+
+	st.full_name = nullptr;
+	st.phonenumber = nullptr;
+	st.city = nullptr;
+	st.country = nullptr;
+	st.school = nullptr;
+	st.city_of_school = nullptr;
+	st.country_of_school = nullptr;
+}
+
+
+student& student::operator=(student&& st)  
+{  
+	if (this == &st)
+	{
+		cout << "Both classes are equal" << endl;
+		return *this;
+	}
+
+	cout << "move" << endl;
+
+	if (phonenumber) { delete[] phonenumber; }
+	if (full_name) { delete[] full_name; }
+	if (city) { delete[] city; }
+	if (country) { delete[] country; }
+	if (school) { delete[] school; }
+	if (city_of_school) { delete[] city_of_school; }
+	if (country_of_school) { delete[] country_of_school; }
+
+	group_number = st.group_number;  
+	phonenumber = st.phonenumber;  
+	full_name = st.full_name;  
+	city = st.city;  
+	country = st.country;  
+	school = st.school;  
+	city_of_school = st.city_of_school;  
+	country_of_school = st.country_of_school;  
+
+	st.phonenumber = nullptr;  
+	st.full_name = nullptr;  
+	st.city = nullptr;  
+	st.country = nullptr;  
+	st.school = nullptr;  
+	st.city_of_school = nullptr;  
+	st.country_of_school = nullptr;  
+ 
+	return *this;  
+}
+
 short student::InputNumber()
 {
 	short temp = 0;
@@ -86,10 +219,7 @@ short student::InputNumber()
 		temp = abs(temp);
 	}
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	}
+	Cinfail();
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	return temp;
@@ -105,10 +235,7 @@ void student::InputStringField(char*& field, const char* prompt)
 
 	cout << prompt << endl;
 	cin.getline(temp, tempsize);
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	}
+	Cinfail();
 
 	field = new char[strlen(temp) + 1];
 	strcpy_s(field, (strlen(temp) + 1), temp);
@@ -134,15 +261,12 @@ char* student::InputPhoneNumber()
 	while (true) {
 		cout << "Enter phone number: " << endl;
 		cin.getline(temp, tempsize);
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		}
+		Cinfail();
 
 		size_t inputSize = strlen(temp);
 
 		if (inputSize == phonesize || inputSize == shortphonesize) {
-			return temp; // Возвращаем введённый номер
+			return temp;
 		}
 		else {
 			cout << "Wrong number, try again" << endl;
@@ -214,46 +338,6 @@ void student::SetCountryOfSchool()
 	InputStringField(country_of_school, "Enter the country where the school is located: ");
 }
 
-const short student::GetGroupNumber() const
-{
-	return group_number;
-}
-
-const char* student::GetPhoneNumber() const
-{
-	return phonenumber;
-}
-
-const char* student::GetFullName() const
-{
-	return full_name;
-}
-
-const char* student::GetCity() const
-{
-	return city;
-}
-
-const char* student::GetCountry() const
-{
-	return country;
-}
-
-const char* student::GetSchool() const
-{
-	return school;
-}
-
-const char* student::GetCityOfSchool() const
-{
-	return city_of_school;
-}
-
-const char* student::GetCountryOfSchool() const
-{
-	return country_of_school;
-}
-
 void student::PrintStudent() const
 {
 	cout << "Full Name: " << full_name << endl;
@@ -266,4 +350,76 @@ void student::PrintStudent() const
 	cout << "Country of School: " << country_of_school << endl;
 	cout << "----------------------------------------" << endl;
 
+}
+
+//istream& operator>>(istream& is, student& obj)
+//{
+//	cout << "Enter your name" << endl;
+//	is >> obj.full_name;
+//	Cinfail();
+//	cout << "Enter your group number" << endl;
+//	is >> obj.group_number;
+//	Cinfail();
+//	cout << "Enter your phone number" << endl;
+//	is >> obj.phonenumber;
+//	Cinfail();
+//	cout << "Enter your city" << endl;
+//	is >> obj.city;
+//	Cinfail();
+//	cout << "Enter your country" << endl;
+//	is >> obj.country;
+//	Cinfail();
+//	cout << "Enter your school" << endl;
+//	is >> obj.school;
+//	Cinfail();
+//	cout << "Enter your city of school" << endl;
+//	is >> obj.city_of_school;
+//	Cinfail();
+//	cout << "Enter your country of school" << endl;
+//	is >> obj.country_of_school;
+//	Cinfail();
+//
+//	return is;
+//}
+
+
+// i already have functions for this and i REALLY like them. They work great, have a lot of checks and i want to use them instead..
+istream& operator>>(istream& is, student& obj)
+{
+	cout << "istream" << endl;
+	obj.SetFullName();
+	obj.SetGroupNumber();
+	obj.SetPhoneNumber();
+	obj.SetCity();
+	obj.SetCountry();
+	obj.SetSchool();
+	obj.SetCityOfSchool();
+	obj.SetCountryOfSchool();
+
+	return is;
+}
+
+ostream& operator<<(ostream& os, const student& obj)
+{
+	cout << "Ostream" << endl;
+	os << "---------------------------------------" << endl
+		<< "Name: " << obj.GetFullName() << endl
+		<< "Group: " << obj.GetGroupNumber() << endl
+		<< "Phone Number: " << obj.GetPhoneNumber() << endl
+		<< "City: " << obj.GetCity() << endl
+		<< "Country: " << obj.GetCountry() << endl
+		<< "School: " << obj.GetSchool() << endl
+		<< "City of School: " << obj.GetCityOfSchool() << endl
+		<< "Country of School: " << obj.GetCountryOfSchool() << endl
+		<< "---------------------------------------" << endl;
+
+
+	return os;
+}
+
+void Cinfail() {
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
 }
