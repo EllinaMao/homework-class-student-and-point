@@ -129,11 +129,12 @@
   <ItemGroup>
     <ClCompile Include="class student.cpp" />
     <ClCompile Include="homework class student.cpp" />
-    <ClCompile Include="Point class.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aspirant.h" />
     <ClInclude Include="class student.h" />
-    <ClInclude Include="Point class.h" />
+    <ClInclude Include="ForeignPassport.h" />
+    <ClInclude Include="Passport.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

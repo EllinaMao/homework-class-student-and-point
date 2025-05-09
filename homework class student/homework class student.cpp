@@ -1,89 +1,53 @@
-// homework class student.cpp : This file contains the 'main' function. Program execution begins and ends there.
+п»ї// homework class student.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
 #include "class student.h"
-//#include "Point class.h"
-
+#include "Aspirant.h"
 using namespace std;
-////Задание 1
-//Реализуйте класс "Студент".Необходимо хранить в переменных - членах класса : ФИО, дату рождения, контактный телефон, город, страну, название учебного заведения, город и страну(где находится учебное заведение), номер группы.Реализуйте функции - члены класса для ввода данных, вывода данных, реализуйте аксессоры для доступа к отдельным переменным - членам.
-//
-//Задание 2
-//Реализуйте класс "Точка".Необходимо хранить координаты x, y, z в переменных - членах класса.Реализуйте функции - члены класса для ввода данных, вывода данных, реализуйте аксессоры для доступа к переменным - членам, реализуйте сохранение в файл и загрузку данных из файла.
+/*
+РќР°СЃР»РµРґРѕРІР°РЅРёРµ
+
+Р—Р°РґР°РЅРёРµ 1
+РЎРѕР·РґР°Р№С‚Рµ РєР»Р°СЃСЃ Student, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃС‚СѓРґРµРЅС‚Рµ.
+
+РЎ РїРѕРјРѕС‰СЊСЋ РјРµС…Р°РЅРёР·РјР° РЅР°СЃР»РµРґРѕРІР°РЅРёСЏ, СЂРµР°Р»РёР·СѓР№С‚Рµ РєР»Р°СЃСЃ Aspirant (Р°СЃРїРёСЂР°РЅС‚ - СЃС‚СѓРґРµРЅС‚, РєРѕС‚РѕСЂС‹Р№ РіРѕС‚РѕРІРёС‚СЃСЏ Рє Р·Р°С‰РёС‚Рµ РєР°РЅРґРёРґР°С‚СЃРєРѕР№ СЂР°Р±РѕС‚С‹) РїСЂРѕРёР·РІРѕРґРЅС‹Р№ РѕС‚ Student.
+
+Р—Р°РґР°РЅРёРµ 2
+РЎРѕР·РґР°Р№С‚Рµ РєР»Р°СЃСЃ Passport (РїР°СЃРїРѕСЂС‚), РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ РїР°СЃРїРѕСЂС‚РЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РіСЂР°Р¶РґР°РЅРёРЅРµ РЈРєСЂР°РёРЅС‹.
+
+РЎ РїРѕРјРѕС‰СЊСЋ РјРµС…Р°РЅРёР·РјР° РЅР°СЃР»РµРґРѕРІР°РЅРёСЏ, СЂРµР°Р»РёР·СѓР№С‚Рµ РєР»Р°СЃСЃ ForeignPassport (Р·Р°РіСЂР°РЅ.РїР°СЃРїРѕСЂС‚) РїСЂРѕРёР·РІРѕРґРЅС‹Р№ РѕС‚ Passport.
+
+РќР°РїРѕРјРЅРёРј, С‡С‚Рѕ Р·Р°РіСЂР°РЅРёС‡РЅС‹Р№ РїР°СЃРїРѕСЂС‚ СЃРѕРґРµСЂР¶РёС‚ РїРѕРјРёРјРѕ РїР°СЃРїРѕСЂС‚РЅС‹С… РґР°РЅРЅС‹С…, С‚Р°РєР¶Рµ РґР°РЅРЅС‹Рµ Рѕ РІРёР·Р°С…, РЅРѕРјРµСЂ Р·Р°РіСЂР°РЅРёС‡РЅРѕРіРѕ РїР°СЃРїРѕСЂС‚Р°.
+
+Р—Р°РґР°РЅРёРµ 3
+РЎРѕР·РґР°С‚СЊ Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№ Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ В«РўСЂР°РЅСЃРїРѕСЂС‚РЅРѕРµ СЃСЂРµРґСЃС‚РІРѕВ» Рё РїСЂРѕРёР·РІРѕРґРЅС‹Рµ РєР»Р°СЃСЃС‹ В«РђРІС‚РѕРјРѕР±РёР»СЊВ», В«Р’РµР»РѕСЃРёРїРµРґВ», В«РџРѕРІРѕР·РєР°В».
+
+РџРѕРґСЃС‡РёС‚Р°С‚СЊ РІСЂРµРјСЏ Рё СЃС‚РѕРёРјРѕСЃС‚СЊ РїРµСЂРµРІРѕР·РєРё РїР°СЃСЃР°Р¶РёСЂРѕРІ Рё РіСЂСѓР·РѕРІ РєР°Р¶РґС‹Рј С‚СЂР°РЅСЃРїРѕСЂС‚РЅС‹Рј СЃСЂРµРґСЃС‚РІРѕРј.
 
 
+
+
+*/
 int main()
 {
-    cout << "Task 1:  student" << endl;
-    /*
-    //student student;
-    student student(101, "Natalia Ivanova", "+123456789", "Odessa", "Ukraine", "Kyiv University", "Kyiv", "Ukraine");
-    //cout << "Entering data for student "<< endl;
-    //student.SetAllFields(); 
+    cout << "Task 1: student" << endl;
 
-    cout << "Displaying student:" << endl;
-    student.PrintStudent();
+    // РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚ Passport РЅР° СЃС‚РµРєРµ
+    Passport passport("Sasha Popova", "1990-01-01", "Ukrainian", "2010-01-01", "2030-01-01");
 
-    cout << "Changing city:" << endl;
-    student.SetCity();
+    // РџРµСЂРµРґР°РµРј СЃСЃС‹Р»РєСѓ РЅР° РѕР±СЉРµРєС‚ Passport
+    Aspirant aspirant(
+        &passport,            
+        101,                 
+        "+380123456789",        
+        "Kyiv National University", 
+        "Artificial Intelligence",  
+        "Dr. Smith",            
+        2023                     
+    );
 
-    cout << "Displaying student:" << endl;
-    student.PrintStudent();
-    */
-
-
-    student student1(101, "Oksana Popkova", "+123456789", "Odessa", "Ukraine", "Step University", "Odessa", "Ukraine");
-    cout << "Displaying student1:" << endl;
-    student1.PrintStudent();
-
-    cout << "Creating student2 using copy constructor:" << endl;
-    student student2(student1);
-    student2.PrintStudent();
-
-    cout << "Assigning student1 to student3 using copy assignment operator:" << endl;
-    student student3;
-    student3 = student1;
-    student3.PrintStudent();
-
-    cout << "Creating student4 using move constructor:" << endl;
-    student student4(move(student1));
-    student4.PrintStudent();
-
-
-    cout << "Assigning student4 to student5 using move assignment operator:" << endl;
-    student student5;
-    student5 = std::move(student4);
-    student5.PrintStudent();
-
-
-    cout << "Enter data for student6 using input operator:" << endl;
-    student student6;
-    cin >> student6;
-
-    cout << "Displaying student6 using output operator:" << endl;
-    cout << student6;
-
-
-    ////////////////////////
-
-    //cout << "task2" << endl;
-
-    //Point point;
-
-    //cout << "Displaying point1:" << endl;
-    //point.Output();
-    //Point point2(1, 2, 5);
-    //cout << "Displaying point2:" << endl;
-    //point2.Output();
-
-    //point2.SaveInFile();
-    //point.LoadFromFile();
-
-    //cout << "Displaying point1:" << endl;
-    //point.Output();
-
-
+    aspirant.PrintAspirant();
 
     return 0;
 }

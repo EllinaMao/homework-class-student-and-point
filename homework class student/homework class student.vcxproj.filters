@@ -26,7 +26,13 @@
     <ClInclude Include="class student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Point class.h">
+    <ClInclude Include="Aspirant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Passport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForeignPassport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
