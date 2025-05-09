@@ -3,13 +3,13 @@
 
 ForeignPassport::ForeignPassport()
     : Passport(), mForeignPassportNumber("Unknown"), mVisaCount(0), mVisaCapacity(5) {
-    mVisas = new string[mVisaCapacity]; // Инициализация динамического массива
+    mVisas = new string[mVisaCapacity]; 
 }
 
 ForeignPassport::ForeignPassport(Passport* passport, const string& foreignPassportNumber)
-    : Passport(*passport), // Инициализация базового класса с использованием копирующего конструктора
+    : Passport(*passport),
     mForeignPassportNumber(foreignPassportNumber), mVisaCount(0), mVisaCapacity(5) {
-    mVisas = new string[mVisaCapacity]; // Инициализация динамического массива для виз
+    mVisas = new string[mVisaCapacity]; 
 }
 
 
