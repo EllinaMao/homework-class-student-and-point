@@ -1,33 +1,36 @@
 ﻿#include "class student.h"
+
+// Конструктор по умолчанию
 student::student()
     : StudentInfo(nullptr), mGroupNumber(0), mPhoneNumber("Unknown"), mSchool("Unknown") {
 }
 
+// Конструктор с параметрами
 student::student(Passport* studentInfo, short groupNumber, const string& phoneNumber, const string& school)
     : StudentInfo(studentInfo), mGroupNumber(groupNumber), mPhoneNumber(phoneNumber), mSchool(school) {
 }
 
-student::~student() {
-    delete StudentInfo;
-}
 
+// Копирующий конструктор
 student::student(const student& other)
     : mGroupNumber(other.mGroupNumber), mPhoneNumber(other.mPhoneNumber), mSchool(other.mSchool) {
+    // Создаем глубокую копию Passport
     if (other.StudentInfo) {
         StudentInfo = new Passport(*other.StudentInfo);
-    }
-    else {
+    } else {
         StudentInfo = nullptr;
     }
 }
 
+// Перемещающий конструктор
 student::student(student&& other) noexcept
     : StudentInfo(other.StudentInfo), mGroupNumber(other.mGroupNumber),
-    mPhoneNumber(std::move(other.mPhoneNumber)), mSchool(std::move(other.mSchool)) {
+      mPhoneNumber(std::move(other.mPhoneNumber)), mSchool(std::move(other.mSchool)) {
+    // Обнуляем указатель в перемещенном объекте
     other.StudentInfo = nullptr;
 }
 
-// Getters
+// Геттеры
 Passport* student::GetStudentInfo() const {
     return StudentInfo;
 }
@@ -44,11 +47,9 @@ string student::GetSchool() const {
     return mSchool;
 }
 
-// Setters
+// Сеттеры
 void student::SetStudentInfo(Passport* studentInfo) {
-    if (StudentInfo) {
-        delete StudentInfo;
-    }
+
     StudentInfo = studentInfo;
 }
 
@@ -64,7 +65,7 @@ void student::SetSchool(const string& school) {
     mSchool = school;
 }
 
-// Print student details
+// Печать информации о студенте
 void student::PrintStudent() const {
     cout << "Student Info: " << (StudentInfo ? StudentInfo->getFullName() : "No Passport Info") << endl;
     cout << "Group Number: " << mGroupNumber << endl;

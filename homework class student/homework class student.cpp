@@ -4,6 +4,8 @@
 #include <iostream>
 #include "class student.h"
 #include "Aspirant.h"
+#include "Passport.h"
+#include "ForeignPassport.h"
 using namespace std;
 /*
 Наследование
@@ -33,12 +35,11 @@ int main()
 {
     cout << "Task 1: student" << endl;
 
-    // Создаем объект Passport на стеке
     Passport passport("Sasha Popova", "1990-01-01", "Ukrainian", "2010-01-01", "2030-01-01");
 
-    // Передаем ссылку на объект Passport
+
     Aspirant aspirant(
-        &passport,            
+        passport,            
         101,                 
         "+380123456789",        
         "Kyiv National University", 
@@ -46,8 +47,14 @@ int main()
         "Dr. Smith",            
         2023                     
     );
-
     aspirant.PrintAspirant();
 
+    ForeignPassport foreignPassport(&passport, "FP123456");
+    foreignPassport.addVisa("USA");
+    foreignPassport.addVisa("England");
+
+    cout << "Foreign Passport Details:" << endl;
+    cout << "Passport Number: " << foreignPassport.getForeignPassportNumber() << endl;
+    foreignPassport.printVisas();
     return 0;
 }

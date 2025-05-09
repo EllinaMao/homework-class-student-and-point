@@ -14,7 +14,7 @@ private:
 public:
     student();
     student(Passport* studentInfo, short groupNumber, const string& phoneNumber, const string& school);
-    ~student();
+
     student(const student& other);
     student(student&& other) noexcept;
 

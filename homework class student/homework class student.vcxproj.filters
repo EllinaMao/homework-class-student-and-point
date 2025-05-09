@@ -21,6 +21,9 @@
     <ClCompile Include="class student.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ForeignPassport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="class student.h">

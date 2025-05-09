@@ -27,11 +27,12 @@ public:
     {
     }
 
-    Aspirant(Passport* studentInfo, short groupNumber, const string& phoneNumber, const string& school,
+    Aspirant(Passport& studentInfo, short groupNumber, const string& phoneNumber, const string& school,
         const string& thesis, const string& advisor, int year)
-        : student(studentInfo, groupNumber, phoneNumber, school),
+        : student(&studentInfo, groupNumber, phoneNumber, school), // Преобразуем ссылку в указатель
         thesisTopic(thesis), scientificAdvisor(advisor), admissionYear(year) {
     }
+
 
     Aspirant(const Aspirant& other) = default;
 
